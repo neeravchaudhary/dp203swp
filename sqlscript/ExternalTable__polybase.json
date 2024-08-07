@@ -1,0 +1,17 @@
+{
+	"name": "ExternalTable__polybase",
+	"properties": {
+		"content": {
+			"query": "create TABLE ActivityLogparquetPB\nwith(\n       DISTRIBUTION = ROUND_ROBIN\n    )\nas select * from ActivityLogparquet\n\n\nselect * from ActivityLogparquetPB",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dp203synapseddpool",
+				"poolName": "dp203synapseddpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

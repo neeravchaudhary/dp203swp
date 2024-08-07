@@ -1,0 +1,17 @@
+{
+	"name": "Load fact and dim Table",
+	"properties": {
+		"content": {
+			"query": "create TABLE FactSales(\n    SalesOrderID\tint\t,\n    CustomerID\tint\t,\n    BillToAddressID\tint\t,\n    ShipToAddressID\tint\t,\n    OrderDate\tdatetime\t,\n    SubTotal\tmoney\t,\n    TaxAmt\tmoney\t,\n    TotalDue\tmoney\t,\n    ProductID\tint\t,\n    OrderQty\tint\t,\n    LineTotal\tmoney\t,\n    UnitPrice\tmoney\t,\n    UnitPriceDiscount\tmoney\t\n)\nwith(\n    DISTRIBUTION=HASH(ProductID)\n)\n\nCREATE TABLE dimProduct\n( \n\tProductID int,\n\tproductName VARCHAR(100) ,\n\tproductCategory VARCHAR(50)  ,\n    Color VARCHAR(20),\n\tListPrice MONEY\n)\nWITH\n(\n\tDISTRIBUTION = REPLICATE\n)\n\ndrop table dimCustomer\n\nCREATE TABLE dimCustomer\n(\n\tCustomerID INT ,\n\tCompanyName varchar(100) ,\n\tEmailAddress varchar(100),\n    customerSk INT\n)\nWITH\n(\n\tDISTRIBUTION = REPLICATE\n)\n\n\ncreate PROCEDURE clearTable\nas \nTRUNCATE table dimCustomer\nTRUNCATE table dimProduct\nTRUNCATE TABLE FactSales",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dp203synapseddpool",
+				"poolName": "dp203synapseddpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

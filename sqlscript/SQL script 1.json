@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "select * from dimCustomer order by 4\n\n\nselect max(customerSk) from dimCustomer\nselect count(*) from factSales",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dp203synapseddpool",
+				"poolName": "dp203synapseddpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

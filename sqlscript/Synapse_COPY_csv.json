@@ -1,0 +1,17 @@
+{
+	"name": "Synapse_COPY_csv",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE ActivityLogcsv\n(\n   [Correlationid] varchar(200),\n   [Operationname] varchar(300),\n   [Status] varchar(100),\n   [Eventcategory] varchar(100),\n   [Level] varchar(100),\n   [Time] varchar(100),\n   [Subscription] varchar(200),\n   [Eventinitiatedby] varchar(1000),\n   [Resourcetype] varchar(300),\n   [Resourcegroup] varchar(1000),\n   [Resource] varchar(2000)\n)\nWITH (\n        DISTRIBUTION=ROUND_ROBIN\n);\n\nselect count(1) from ActivityLogcsv\n\n\nCOPY INTO ActivityLogcsv\nfrom 'https://dp203adls2.blob.core.windows.net/mydata/ActivityLog-01.csv'\nwith (\n    FILE_TYPE='CSV',\n    FIRSTROW=2,\n    CREDENTIAL=(\n        IDENTITY='Shared Access Signature',\n        SECRET='sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-07-15T16:55:01Z&st=2024-07-15T08:55:01Z&spr=https&sig=Pb8veC5Y45Z%2FrSwp9%2BDmaDIrf8uz8XhFJQCB3R2mulY%3D'\n    )\n);",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dp203synapseddpool",
+				"poolName": "dp203synapseddpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

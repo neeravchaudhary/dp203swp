@@ -1,0 +1,17 @@
+{
+	"name": "Surrogate Keys",
+	"properties": {
+		"content": {
+			"query": "drop TABLE dimProduct\n\nCREATE TABLE dimProduct\n( \n\tproductSk int,\n    ProductID int,\n\tproductName VARCHAR(100) ,\n\tproductCategory VARCHAR(50)  ,\n    Color VARCHAR(20),\n\tListPrice MONEY\n)\nWITH\n(\n\tDISTRIBUTION = REPLICATE\n)\n\nselect * from dimProduct",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dp203synapseddpool",
+				"poolName": "dp203synapseddpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

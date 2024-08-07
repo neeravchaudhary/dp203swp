@@ -1,0 +1,17 @@
+{
+	"name": "builtin_sqlPool_csv",
+	"properties": {
+		"content": {
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD ='Year@2023'\n\nCREATE DATABASE SCOPED CREDENTIAL Accessdp203ddpool\nWITH IDENTITY='SHARED ACCESS SIGNATURE',\nSECRET='sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2024-07-20T19:19:01Z&st=2024-07-20T11:19:01Z&spr=https&sig=c2sHZOh3cLlR7e4hicakVmAMr7mmtW51Z%2FlytghDEc8%3D';\n\n\n\nCREATE EXTERNAL DATA SOURCE srcActivitylogcsv\nWITH \n(\n    LOCATION = 'https://dp203adls2.blob.core.windows.net/mydata',\n    --Type = HADOOP, user with dedicated pool\n    CREDENTIAL = Accessdp203ddpool\n)\n\nCREATE EXTERNAL FILE FORMAT CsvFileFormat\nWITH(\n        FORMAT_TYPE = DELIMITEDTEXT,\n        FORMAT_OPTIONS \n        (\n            FIELD_TERMINATOR=',',\n            FIRST_ROW=2\n        )\n    );\n\n\n\nCREATE EXTERNAL TABLE ActivityLog\n(\n   [Correlationid] varchar(200),\n   [Operationname] varchar(300),\n   [Status] varchar(100),\n   [Eventcategory] varchar(100),\n   [Level] varchar(100),\n   [Time] varchar(100),\n   [Subscription] varchar(200),\n   [Eventinitiatedby] varchar(1000),\n   [Resourcetype] varchar(300),\n   [Resourcegroup] varchar(1000),\n   [Resource] varchar(2000))\nWITH (\n    LOCATION='/ActivityLog-01.csv',\n    DATA_SOURCE=srcActivitylogcsv,\n    FILE_FORMAT=CsvFileFormat\n)\n\n\nselect * from ActivityLog",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "myappdb",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
